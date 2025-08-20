@@ -1,0 +1,43 @@
+{
+	"geode": "4.7.0",
+	"gd": {
+		"win": "2.2074",
+		"android": "2.2074",
+		"mac": "2.2074",
+		"ios": "2.2074"
+	},
+	"id": "thefriendlyfoe.trigger_duration_keys",
+	"name": "Trigger Duration Keys",
+	"version": "v1.0.0",
+	"developer": "TheFriendlyFoe",
+	"description": "",
+	"dependencies": {
+		"geode.custom-keybinds": {
+			"importance": "required",
+			"version": "v1.1.0"
+	  	}
+	},
+	"settings": {
+        "small_duration": {
+            "type": "float",
+            "name": "Small Duration Amount",
+            "default": 0.01,
+			"min": 0,
+			"max": 10
+        },
+        "medium_duration": {
+            "type": "float",
+            "name": "Medium Duration Amount",
+            "default": 0.1,
+			"min": 0,
+			"max": 10
+        },
+		"large_duration": {
+            "type": "float",
+            "name": "Large Duration Amount",
+            "default": 1,
+			"min": 0,
+			"max": 10
+        }
+    }
+}
