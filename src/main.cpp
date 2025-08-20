@@ -17,65 +17,65 @@ $execute {
     );
     keybinds::BindManager::get()->registerBindable(
         keybinds::BindableAction(
-            "decrease_trigger_duration_medium"_spr, //ID
-            "Decrease Duration - Medium", // Name
-            "", // Description, leave empty for none
-            {keybinds::Keybind::create(KEY_Five, keybinds::Modifier::None)}, // Default binds
-            "Trigger Duration" // Category
+            "decrease_trigger_duration_medium"_spr, // I will die on the snake_case hill
+            "Decrease Duration - Medium",
+            "",
+            {keybinds::Keybind::create(KEY_Five, keybinds::Modifier::None)},
+            "Trigger Duration"
         )
     );
     keybinds::BindManager::get()->registerBindable(
         keybinds::BindableAction(
-            "decrease_trigger_duration_small"_spr, //ID
-            "Decrease Duration - Small", // Name
-            "", // Description, leave empty for none
-            {keybinds::Keybind::create(KEY_Five, keybinds::Modifier::Shift)}, // Default binds
-            "Trigger Duration" // Category
+            "decrease_trigger_duration_small"_spr,
+            "Decrease Duration - Small",
+            "",
+            {keybinds::Keybind::create(KEY_Five, keybinds::Modifier::Shift)},
+            "Trigger Duration"
         )
     );
     keybinds::BindManager::get()->registerBindable(
         keybinds::BindableAction(
-            "increase_trigger_duration_large"_spr, //ID
-            "Increase Duration - Large", // Name
-            "", // Description, leave empty for none
-            {}, // Default binds
-            "Trigger Duration" // Category
+            "increase_trigger_duration_large"_spr,
+            "Increase Duration - Large",
+            "",
+            {},
+            "Trigger Duration"
         )
     );
     keybinds::BindManager::get()->registerBindable(
         keybinds::BindableAction(
-            "increase_trigger_duration_medium"_spr, //ID
-            "Increase Duration - Medium", // Name
-            "", // Description, leave empty for none
-            {keybinds::Keybind::create(KEY_Six, keybinds::Modifier::None)}, // Default binds
-            "Trigger Duration" // Category
+            "increase_trigger_duration_medium"_spr,
+            "Increase Duration - Medium",
+            "",
+            {keybinds::Keybind::create(KEY_Six, keybinds::Modifier::None)},
+            "Trigger Duration"
         )
     );
     keybinds::BindManager::get()->registerBindable(
         keybinds::BindableAction(
-            "increase_trigger_duration_small"_spr, //ID
-            "Increase Duration - Small", // Name
-            "", // Description, leave empty for none
-            {keybinds::Keybind::create(KEY_Six, keybinds::Modifier::Shift)}, // Default binds
-            "Trigger Duration" // Category
+            "increase_trigger_duration_small"_spr,
+            "Increase Duration - Small",
+            "",
+            {keybinds::Keybind::create(KEY_Six, keybinds::Modifier::Shift)},
+            "Trigger Duration"
         )
     );
     keybinds::BindManager::get()->registerBindable(
         keybinds::BindableAction(
-            "copy_trigger_duration"_spr, //ID
-            "Copy Duration", // Name
-            "", // Description, leave empty for none
-            {keybinds::Keybind::create(KEY_Eight, keybinds::Modifier::None)}, // Default binds
-            "Trigger Duration" // Category
+            "copy_trigger_duration"_spr,
+            "Copy Duration",
+            "",
+            {keybinds::Keybind::create(KEY_Eight, keybinds::Modifier::None)},
+            "Trigger Duration"
         )
     );
     keybinds::BindManager::get()->registerBindable(
         keybinds::BindableAction(
-            "paste_trigger_duration"_spr, //ID
-            "Paste Duration", // Name
-            "", // Description, leave empty for none
-            {keybinds::Keybind::create(KEY_Seven, keybinds::Modifier::None)}, // Default binds
-            "Trigger Duration" // Category
+            "paste_trigger_duration"_spr,
+            "Paste Duration",
+            "",
+            {keybinds::Keybind::create(KEY_Seven, keybinds::Modifier::None)},
+            "Trigger Duration"
         )
     );
 }
@@ -109,7 +109,6 @@ class $modify(TDKEditorUI, EditorUI) {
 
         this->template addEventListener<keybinds::InvokeBindFilter>([=](keybinds::InvokeBindEvent* event) {
             if (event->isDown()) {
-                log::info("decrease large");
                 change_trigger_durations(-m_fields->large_duration);
             }
             return ListenerResult::Propagate;
@@ -117,7 +116,6 @@ class $modify(TDKEditorUI, EditorUI) {
 
         this->template addEventListener<keybinds::InvokeBindFilter>([=](keybinds::InvokeBindEvent* event) {
             if (event->isDown()) {
-                log::info("decrease medium");
                 change_trigger_durations(-m_fields->medium_duration);
             }
             return ListenerResult::Propagate;
@@ -125,7 +123,6 @@ class $modify(TDKEditorUI, EditorUI) {
 
         this->template addEventListener<keybinds::InvokeBindFilter>([=](keybinds::InvokeBindEvent* event) {
             if (event->isDown()) {
-                log::info("decrease small");
                 change_trigger_durations(-m_fields->small_duration);
             }
             return ListenerResult::Propagate;
@@ -133,7 +130,6 @@ class $modify(TDKEditorUI, EditorUI) {
 
         this->template addEventListener<keybinds::InvokeBindFilter>([=](keybinds::InvokeBindEvent* event) {
             if (event->isDown()) {
-                log::info("increase large");
                 change_trigger_durations(m_fields->large_duration);
             }
             return ListenerResult::Propagate;
@@ -141,7 +137,6 @@ class $modify(TDKEditorUI, EditorUI) {
 
         this->template addEventListener<keybinds::InvokeBindFilter>([=](keybinds::InvokeBindEvent* event) {
             if (event->isDown()) {
-                log::info("increase medium");
                 change_trigger_durations(m_fields->medium_duration);
             }
             return ListenerResult::Propagate;
@@ -149,7 +144,6 @@ class $modify(TDKEditorUI, EditorUI) {
 
         this->template addEventListener<keybinds::InvokeBindFilter>([=](keybinds::InvokeBindEvent* event) {
             if (event->isDown()) {
-                log::info("increase small");
                 change_trigger_durations(m_fields->small_duration);
             }
             return ListenerResult::Propagate;
@@ -159,7 +153,6 @@ class $modify(TDKEditorUI, EditorUI) {
         
         this->template addEventListener<keybinds::InvokeBindFilter>([=](keybinds::InvokeBindEvent* event) {
             if (event->isDown()) {
-                log::info("copy");
                 for (auto obj : CCArrayExt<GameObject*>(getSelectedObjects())) {
                     auto trigger = typeinfo_cast<EffectGameObject*>(obj);
                     if (!trigger) continue;
@@ -172,7 +165,6 @@ class $modify(TDKEditorUI, EditorUI) {
 
         this->template addEventListener<keybinds::InvokeBindFilter>([=](keybinds::InvokeBindEvent* event) {
             if (event->isDown()) {
-                log::info("paste");
                 for (auto obj : CCArrayExt<GameObject*>(getSelectedObjects())) {
                     auto trigger = typeinfo_cast<EffectGameObject*>(obj);
                     if (!trigger) continue;
