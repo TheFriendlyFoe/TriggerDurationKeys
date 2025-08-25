@@ -2,7 +2,7 @@
 using namespace geode::prelude;
 
 #include <geode.custom-keybinds/include/Keybinds.hpp> // I love this mod
-#include <geode/modify/EditorUI.hpp>
+#include <Geode/modify/EditorUI.hpp>
 #include <Geode/utils/general.hpp>
 
 $execute {
@@ -80,7 +80,7 @@ $execute {
     );
 }
 
-float copied_trigger_duration = 0.0f; // this is global for a reason and i refuse to make a namespace for a single variable
+std::optional<float> copied_trigger_duration = std::nullopt; // this is global for a reason and i refuse to make a namespace for a single variable
 
 class $modify(TDKEditorUI, EditorUI) {
 
@@ -95,8 +95,8 @@ class $modify(TDKEditorUI, EditorUI) {
 
     void change_trigger_durations(float duration) {
         for (auto obj : CCArrayExt<GameObject*>(getSelectedObjects())) {
-            auto trigger = typeinfo_cast<EffectGameObject*>(obj);
-            if (!trigger) continue;
+            auto trigger = static_cast<EffectGameObject*>(obj);
+            if (trigger->m_classType != GameObjectClassType::Effect) continue;
             trigger->m_duration = std::max(0.0f, trigger->m_duration + duration);
         }
         m_editorLayer->m_drawGridLayer->m_updateTimeMarkers = true; // this is how one updates the drawing of duration lines
@@ -107,42 +107,42 @@ class $modify(TDKEditorUI, EditorUI) {
         
         // duration increases / decreases
 
-        this->template addEventListener<keybinds::InvokeBindFilter>([=](keybinds::InvokeBindEvent* event) {
+        this->template addEventListener<keybinds::InvokeBindFilter>([this](keybinds::InvokeBindEvent* event) {
             if (event->isDown()) {
                 change_trigger_durations(-m_fields->large_duration);
             }
             return ListenerResult::Propagate;
         }, "decrease_trigger_duration_large"_spr);
 
-        this->template addEventListener<keybinds::InvokeBindFilter>([=](keybinds::InvokeBindEvent* event) {
+        this->template addEventListener<keybinds::InvokeBindFilter>([this](keybinds::InvokeBindEvent* event) {
             if (event->isDown()) {
                 change_trigger_durations(-m_fields->medium_duration);
             }
             return ListenerResult::Propagate;
         }, "decrease_trigger_duration_medium"_spr);
 
-        this->template addEventListener<keybinds::InvokeBindFilter>([=](keybinds::InvokeBindEvent* event) {
+        this->template addEventListener<keybinds::InvokeBindFilter>([this](keybinds::InvokeBindEvent* event) {
             if (event->isDown()) {
                 change_trigger_durations(-m_fields->small_duration);
             }
             return ListenerResult::Propagate;
         }, "decrease_trigger_duration_small"_spr);
 
-        this->template addEventListener<keybinds::InvokeBindFilter>([=](keybinds::InvokeBindEvent* event) {
+        this->template addEventListener<keybinds::InvokeBindFilter>([this](keybinds::InvokeBindEvent* event) {
             if (event->isDown()) {
                 change_trigger_durations(m_fields->large_duration);
             }
             return ListenerResult::Propagate;
         }, "increase_trigger_duration_large"_spr);
 
-        this->template addEventListener<keybinds::InvokeBindFilter>([=](keybinds::InvokeBindEvent* event) {
+        this->template addEventListener<keybinds::InvokeBindFilter>([this](keybinds::InvokeBindEvent* event) {
             if (event->isDown()) {
                 change_trigger_durations(m_fields->medium_duration);
             }
             return ListenerResult::Propagate;
         }, "increase_trigger_duration_medium"_spr);
 
-        this->template addEventListener<keybinds::InvokeBindFilter>([=](keybinds::InvokeBindEvent* event) {
+        this->template addEventListener<keybinds::InvokeBindFilter>([this](keybinds::InvokeBindEvent* event) {
             if (event->isDown()) {
                 change_trigger_durations(m_fields->small_duration);
             }
@@ -151,11 +151,11 @@ class $modify(TDKEditorUI, EditorUI) {
 
         // duration copy / paste
         
-        this->template addEventListener<keybinds::InvokeBindFilter>([=](keybinds::InvokeBindEvent* event) {
+        this->template addEventListener<keybinds::InvokeBindFilter>([this](keybinds::InvokeBindEvent* event) {
             if (event->isDown()) {
                 for (auto obj : CCArrayExt<GameObject*>(getSelectedObjects())) {
-                    auto trigger = typeinfo_cast<EffectGameObject*>(obj);
-                    if (!trigger) continue;
+                    auto trigger = static_cast<EffectGameObject*>(obj);
+                    if (trigger->m_classType != GameObjectClassType::Effect) continue;
                     copied_trigger_duration = trigger->m_duration;
                     break;
                 }
@@ -163,12 +163,12 @@ class $modify(TDKEditorUI, EditorUI) {
             return ListenerResult::Propagate;
         }, "copy_trigger_duration"_spr);
 
-        this->template addEventListener<keybinds::InvokeBindFilter>([=](keybinds::InvokeBindEvent* event) {
-            if (event->isDown()) {
+        this->template addEventListener<keybinds::InvokeBindFilter>([this](keybinds::InvokeBindEvent* event) {
+            if (event->isDown() && copied_trigger_duration) {
                 for (auto obj : CCArrayExt<GameObject*>(getSelectedObjects())) {
-                    auto trigger = typeinfo_cast<EffectGameObject*>(obj);
-                    if (!trigger) continue;
-                    trigger->m_duration = copied_trigger_duration;
+                    auto trigger = static_cast<EffectGameObject*>(obj);
+                    if (trigger->m_classType != GameObjectClassType::Effect) continue;
+                    trigger->m_duration = *copied_trigger_duration;
                 }
                 m_editorLayer->m_drawGridLayer->m_updateTimeMarkers = true;
             }

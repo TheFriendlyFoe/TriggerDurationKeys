@@ -1,3 +1,13 @@
-Use 5 to make line small, 6 to make line big.
-8 to copy and 7 to paste.
-Look in keys for other keybinds, and you can change the duration change amount in settings.
+# Trigger Duration Keys
+Keybinds for adjusting trigger durations.
+
+## Keybinds
+These can be customized in the "Custom Keybinds" mod's settings. The amounts can be adjusted in this mod's settings.
+- Decrease duration by a large amount - `None`
+- Decrease duration by a medium amount - `5`
+- Decrease duration by a small amount - `Shift + 5`
+- Increase duration by a large amount - `None`
+- Increase duration by a medium amount - `6`
+- Increase duration by a small amount - `Shift + 6`
+- Copy duration - `8`
+- Paste duration - `7`
