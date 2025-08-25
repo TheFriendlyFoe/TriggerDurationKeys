@@ -2,13 +2,14 @@
 	"geode": "4.7.0",
 	"gd": {
 		"win": "2.2074",
+		"android": "2.2074",
 		"mac": "2.2074"
 	},
 	"id": "thefriendlyfoe.trigger_duration_keys",
 	"name": "Trigger Duration Keys",
 	"version": "v1.0.2",
 	"developer": "TheFriendlyFoe",
-	"description": "",
+	"description": "Keybinds for adjusting trigger durations.",
 	"dependencies": {
 		"geode.custom-keybinds": {
 			"importance": "required",
